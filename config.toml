@@ -17,7 +17,7 @@ enableEmoji = true
   # Author of the site, will be used in meta information
   author = "Justin Perkins, Yan Pinheiro, and Fernando Cardoso @ Trend Micro"
   # Description of the site, will be used in meta information
-  description = "Learn how to gain security visibility across multiple application in your organization. This empowers security teams with better visibility, tracking, and early awareness into open source issues for more relevant insights and risk management."
+  description = "Learn how to leverage Trend Micro Cloud One - Application Security with your serverless applications running on AWS Lambda or containerized applications running on AWS Fargate. If you looking to make cloud security more efficient, proactive, and gain visibility to help lead your developers, cloud architects, and DevOps engineers, this workshop is for you! Bridge the gap between your security and development teams by providing relevant information to gain better visibility into attacks targeting your cloud native applications, and take security action."
   # Shows a checkmark for visited pages on the menu
   showVisitedLinks = true
   # Disable search function. It will hide search bar

@@ -1,9 +1,9 @@
 ---
-title: "Building Modernization Application with Security embedded - DevSecOps"
+title: "Building Modern Applications with Security Embedded - DevSecOps"
 chapter: true
 weight: 1
 ---
-# DEVSECOPS: HOW TO BUILD MODERN APPLICATIONS WITH EMBEDDED SECURITY 
+# Building Modern Applications with Security Embedded - DevSecOps
 
 ![TrendMicro](/images/logo.png)
 
@@ -73,9 +73,10 @@ For any additional help please reach out to:
 
 - Justin Perkins - (Email: justin_perkins@trendmicro.com)
 - Fernando Cardoso - (Email: fernando_cardoso@trendmicro.com)
+- Yan Pinheiro - (Email: yan_pinheiro@trendmicro.com)
 
 <p>
-<a  href="mailto:fernando_cardoso@trendmicro.com;justin_perkins@trendmicro.com?subject=Feedback Cloud One - Application Security Workshop"  target="_blank" rel="noopener noreferrer"  class="btn btn-default">  
+<a  href="mailto:fernando_cardoso@trendmicro.com;justin_perkins@trendmicro.com;yan_pinheiro@trendmicro.com?subject=Feedback Cloud One - Application Security Workshop"  target="_blank" rel="noopener noreferrer"  class="btn btn-default">  
   Talk to us
   <i class="fas fa-paper-plane"></i>
 </a>
