@@ -1,0 +1,560 @@
+Description: "AWS Workshop - Cloud One  Application Security with Lambda."
+Resources:
+  applicationsecuritywebapp63AC9131:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Description: Our very first serverless app!
+      Name: Application Secuirty - Serverless Web App
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityVulnerableWebApp
+  applicationsecuritywebappCloudWatchRole5BF6FEF3:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityVulnerableWebApp
+  applicationsecuritywebappAccount60E83E28:
+    Type: AWS::ApiGateway::Account
+    Properties:
+      CloudWatchRoleArn:
+        Fn::GetAtt:
+          - applicationsecuritywebappCloudWatchRole5BF6FEF3
+          - Arn
+    DependsOn:
+      - applicationsecuritywebapp63AC9131
+  applicationsecuritywebappDeploymentA6C2500D3e772887de3b3d90a7d5cfec3698233d:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId:
+        Ref: applicationsecuritywebapp63AC9131
+      Description: Automatically created by the RestApi construct
+    DependsOn:
+      - applicationsecuritywebappbackendGET6ED6D804
+      - applicationsecuritywebappbackendE38F6F09
+      - applicationsecuritywebappGET4BCBF288
+  applicationsecuritywebappDeploymentStageprod686052F7:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      RestApiId:
+        Ref: applicationsecuritywebapp63AC9131
+      DeploymentId:
+        Ref: applicationsecuritywebappDeploymentA6C2500D3e772887de3b3d90a7d5cfec3698233d
+      StageName: prod
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityVulnerableWebApp
+  applicationsecuritywebappGETApiPermissionServerlessAppStackapplicationsecuritywebapp05738232GET1A7309EC:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - ApplicationSecurityFrontendPage0CFDB182
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: applicationsecuritywebapp63AC9131
+            - /
+            - Ref: applicationsecuritywebappDeploymentStageprod686052F7
+            - /GET/
+  applicationsecuritywebappGETApiPermissionTestServerlessAppStackapplicationsecuritywebapp05738232GET3467C1F8:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - ApplicationSecurityFrontendPage0CFDB182
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: applicationsecuritywebapp63AC9131
+            - /test-invoke-stage/GET/
+  applicationsecuritywebappGET4BCBF288:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: GET
+      ResourceId:
+        Fn::GetAtt:
+          - applicationsecuritywebapp63AC9131
+          - RootResourceId
+      RestApiId:
+        Ref: applicationsecuritywebapp63AC9131
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        RequestTemplates:
+          text/html: '{ "statusCode": "200" }'
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - ApplicationSecurityFrontendPage0CFDB182
+                  - Arn
+              - /invocations
+  applicationsecuritywebappbackendE38F6F09:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Fn::GetAtt:
+          - applicationsecuritywebapp63AC9131
+          - RootResourceId
+      PathPart: backend
+      RestApiId:
+        Ref: applicationsecuritywebapp63AC9131
+  applicationsecuritywebappbackendGETApiPermissionServerlessAppStackapplicationsecuritywebapp05738232GETbackend0E9D3252:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - ApplicationSecurityBackendPage7A3846DF
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: applicationsecuritywebapp63AC9131
+            - /
+            - Ref: applicationsecuritywebappDeploymentStageprod686052F7
+            - /GET/backend
+  applicationsecuritywebappbackendGETApiPermissionTestServerlessAppStackapplicationsecuritywebapp05738232GETbackendD6BFF261:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - ApplicationSecurityBackendPage7A3846DF
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:"
+            - Ref: AWS::Region
+            - ":"
+            - Ref: AWS::AccountId
+            - ":"
+            - Ref: applicationsecuritywebapp63AC9131
+            - /test-invoke-stage/GET/backend
+  applicationsecuritywebappbackendGET6ED6D804:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: GET
+      ResourceId:
+        Ref: applicationsecuritywebappbackendE38F6F09
+      RestApiId:
+        Ref: applicationsecuritywebapp63AC9131
+      AuthorizationType: NONE
+      Integration:
+        IntegrationHttpMethod: POST
+        RequestTemplates:
+          text/html: '{ "statusCode": "200" }'
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - ":apigateway:"
+              - Ref: AWS::Region
+              - :lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - ApplicationSecurityBackendPage7A3846DF
+                  - Arn
+              - /invocations
+  ApplicationSecurityFrontendPageServiceRole1980AAB8:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityFrontendPage
+  ApplicationSecurityFrontendPage0CFDB182:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |+
+          import json
+          import urllib3
+          HTTP = urllib3.PoolManager()
+          INSECURE_HTML = '''
+          <!DOCTYPE html>
+          <html>
+          <title>ACME App</title>
+          <body style="background-color:red;">
+          <h1>Oh no!</h1>
+          <p>Either your app is insecure, or you've missed a step!</p>
+          </body>
+          </html>
+          '''
+          SECURE_HTML_DAY_ONE = '''
+          <!DOCTYPE html>
+          <html>
+          <title>ACME App</title>
+          <body style="background-color:lightgreen;">
+          <h1>Congratulations!</h1>
+          <p>It looks like you've enabled Application Security!</p>
+          <p>Just to be sure though, <b>check the Application Security dashboard</b>. If you don't see attacks being blocked, 
+          you might have missed a step!</p>
+          </body>
+          </html>
+          '''
+          SECURE_HTML_DAY_TWO = '''
+          <!DOCTYPE html>
+          <html>
+          <title>ACME App</title>
+          <body style="background-color:yellow;">
+          <h1>Congratulations!</h1>
+          <p>You've removed the bug from your code!</p>
+          </body>
+          </html>
+          '''
+          def _get_backend_url(event):
+              domain_name = event['requestContext']['domainName']
+              stage_name = event['requestContext']['stage']
+              backend_url = f'https://{domain_name}/{stage_name}/backend'
+              
+              return backend_url
+          def main_handler(event, context):
+              backend_url = _get_backend_url(event)
+              resp = HTTP.request('GET', backend_url)
+              print(f'Status: {resp.status}')
+              message = json.loads(resp.data).get('message')
+              print(f'Message: {message}')
+              if resp.status == 502:
+                  return {
+                      "statusCode": 200,
+                      "body": SECURE_HTML_DAY_ONE,
+                      "headers": {
+                      'Content-Type': 'text/html',
+                      }
+                  }
+              elif resp.status == 200 and 'welcome to our secure website' in message.lower():
+                  return {
+                      "statusCode": 200,
+                      "body": SECURE_HTML_DAY_TWO,
+                      "headers": {
+                      'Content-Type': 'text/html',
+                      }
+                  }
+              else:
+                  return {
+                      "statusCode": 200,
+                      "body": INSECURE_HTML,
+                      "headers": {
+                      'Content-Type': 'text/html',
+                      }
+                  }
+              return resp
+      Role:
+        Fn::GetAtt:
+          - ApplicationSecurityFrontendPageServiceRole1980AAB8
+          - Arn
+      Description: Application Security Web GUI
+      FunctionName: ApplicationSecurityFrontendPage
+      Handler: index.main_handler
+      Runtime: python3.8
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityFrontendPage
+    DependsOn:
+      - ApplicationSecurityFrontendPageServiceRole1980AAB8
+  ApplicationSecurityBackendPageServiceRole68735343:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityBackendPage
+  ApplicationSecurityBackendPage7A3846DF:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |+
+          import json
+          vars_file_path = '../../proc/self/environ'
+          def main_handler(event, context):
+              message = {"message": "Welcome to our secure website"}
+              f = open(vars_file_path, "r"); f.readline(); f.close(); message = {"message": "Welcome to our website"}
+              
+              return {
+                  "statusCode": 200,
+                  "body": json.dumps(message),
+              }
+              
+      Role:
+        Fn::GetAtt:
+          - ApplicationSecurityBackendPageServiceRole68735343
+          - Arn
+      Description: Application Security Vulnerable app - PLEASE SECURE ME!
+      Environment:
+        Variables:
+          TREND_AP_HELLO_URL: !Ref C1RegionEndpoint
+      FunctionName: ApplicationSecurityBackendPage
+      Handler: index.main_handler
+      MemorySize: 512
+      Runtime: python3.8
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityBackendPage
+      Timeout: 10
+    DependsOn:
+      - ApplicationSecurityBackendPageServiceRole68735343
+  ApplicationSecurityDayOneVerificationLambdaServiceRoleE4A6FAED:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityDayOneVerificationLambda
+  ApplicationSecurityDayOneVerificationLambda679755A8:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |+
+          import os
+          import json
+          import urllib3
+          HTTP = urllib3.PoolManager()
+          def main_handler(event, context):
+              web_app_url = os.environ['WEB_APP_URL']
+              backend_url = f'{web_app_url}/backend/'
+              resp = HTTP.request('GET', backend_url)
+              message = json.loads(resp.data).get('message')
+              if message == 'Internal server error' or 'welcome to our secure website' in message.lower():
+                  return True
+              
+              else:
+                  raise Exception("Either your app is insecure, or you've missed a step!")
+              
+      Role:
+        Fn::GetAtt:
+          - ApplicationSecurityDayOneVerificationLambdaServiceRoleE4A6FAED
+          - Arn
+      Description: Application Security Day One verificaiton
+      Environment:
+        Variables:
+          WEB_APP_URL:
+            Fn::Join:
+              - ""
+              - - https://
+                - Ref: applicationsecuritywebapp63AC9131
+                - .execute-api.
+                - Ref: AWS::Region
+                - "."
+                - Ref: AWS::URLSuffix
+                - /
+                - Ref: applicationsecuritywebappDeploymentStageprod686052F7
+                - /
+      FunctionName: ApplicationSecurityDayOneVerificationLambda
+      Handler: index.main_handler
+      Runtime: python3.8
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityDayOneVerificationLambda
+      Timeout: 10
+    DependsOn:
+      - ApplicationSecurityDayOneVerificationLambdaServiceRoleE4A6FAED
+  ApplicationSecurityDayTwoVerificationLambdaServiceRole8B65B915:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityDayTwoVerificationLambda
+  ApplicationSecurityDayTwoVerificationLambda65AE9CE5:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        ZipFile: |+
+          import os
+          import json
+          import urllib3
+          HTTP = urllib3.PoolManager()
+          def main_handler(event, context):
+              web_app_url = os.environ['WEB_APP_URL']
+              backend_url = f'{web_app_url}/backend/'
+              resp = HTTP.request('GET', backend_url)
+              message = json.loads(resp.data).get('message')
+              if 'welcome to our secure website' in message.lower():
+                  return True
+              
+              else:
+                  raise Exception("Either your app is insecure, or you've missed a step!")
+      Role:
+        Fn::GetAtt:
+          - ApplicationSecurityDayTwoVerificationLambdaServiceRole8B65B915
+          - Arn
+      Description: Application Security Day Two verificaiton
+      Environment:
+        Variables:
+          WEB_APP_URL:
+            Fn::Join:
+              - ""
+              - - https://
+                - Ref: applicationsecuritywebapp63AC9131
+                - .execute-api.
+                - Ref: AWS::Region
+                - "."
+                - Ref: AWS::URLSuffix
+                - /
+                - Ref: applicationsecuritywebappDeploymentStageprod686052F7
+                - /
+      FunctionName: ApplicationSecurityDayTwoVerificationLambda
+      Handler: index.main_handler
+      Runtime: python3.8
+      Tags:
+        - Key: Name
+          Value: ApplicationSecurityDayTwoVerificationLambda
+      Timeout: 10
+    DependsOn:
+      - ApplicationSecurityDayTwoVerificationLambdaServiceRole8B65B915
+Parameters:
+  C1RegionEndpoint:
+    Type: String
+    Description: Enter your Cloud One Region Endpoint
+Outputs:
+  applicationsecuritywebappEndpoint1AF7957D:
+    Value:
+      Fn::Join:
+        - ""
+        - - https://
+          - Ref: applicationsecuritywebapp63AC9131
+          - .execute-api.
+          - Ref: AWS::Region
+          - "."
+          - Ref: AWS::URLSuffix
+          - /
+          - Ref: applicationsecuritywebappDeploymentStageprod686052F7
+          - /
+  ApplicationSecurityWebAppUrl:
+    Description: Application Security Web app URL
+    Value:
+      Fn::Join:
+        - ""
+        - - https://
+          - Ref: applicationsecuritywebapp63AC9131
+          - .execute-api.
+          - Ref: AWS::Region
+          - "."
+          - Ref: AWS::URLSuffix
+          - /
+          - Ref: applicationsecuritywebappDeploymentStageprod686052F7
+          - /
+    Export:
+      Name: ApplicationSecurityWebAppUrl
+  ApplicationSecurityBackendLambdaCode:
+    Description: Application Security Backend Lambda code
+    Value:
+      Fn::Join:
+        - ""
+        - - https://
+          - Ref: AWS::Region
+          - .console.aws.amazon.com/lambda/home?region=
+          - Ref: AWS::Region
+          - "#/functions/ApplicationSecurityBackendPage?tab=code"
+    Export:
+      Name: ApplicationSecurityBackendLambdaCode
+  ApplicationSecurityBackendLambdaFunctionArn:
+    Description: Application Security Backend Lambda function ARN
+    Value:
+      Fn::GetAtt:
+        - ApplicationSecurityBackendPage7A3846DF
+        - Arn
+    Export:
+      Name: ApplicationSecurityBackendLambdaFunctionArn

@@ -1,18 +1,25 @@
-## My Project
+# Application Security with TREND MICRO - CLOUD ONE
 
-TODO: Fill this README out!
+Trend Micro Cloud One – Application Security for detection and protection for modern applications and APIs built on your container, serverless,
+and other computing platforms
 
-Be sure to:
+## Learning Objectives
+- Avoid common developer mistakes - Learn about OWASP Top 10 risks 
+- Understand the importance of automated and human code review
+- Learn how to easily integrate security protection libraries into your own serverless functions
+- Gain insight down to the line of code for threats
 
-* Change the title in this README
-* Edit your repository description on GitHub
 
-## Security
+## Who should attend
+- Cloud Security Engineer
+- DevSecOps Engineer
+- SecOps Engineers
+- Information Security
+- Risk Application Manager
+- Application Security 
+- or anyone interested in open source security and license management visibility across multiple application projects
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
-## License Summary
+# AWSWorkshop.io base workshop 
 
-The documentation is made available under the Creative Commons Attribution-ShareAlike 4.0 International License. See the LICENSE file.
-
-The sample code within this documentation is made available under the MIT-0 license. See the LICENSE-SAMPLECODE file.
+This is a base workshop.  Clone and start from this repo to create your workshop.
