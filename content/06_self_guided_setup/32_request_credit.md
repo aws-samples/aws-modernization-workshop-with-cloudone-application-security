@@ -9,10 +9,10 @@ weight: 4
   <td class="credit" style="width:70%">
   To help you cover the AWS service costs incurred by doing this tutorial, AWS credits are available courtesy of AWS Marketplace. Submit the form and you will receive a confirmation email with an AWS credit code. Credits are available while supplies last. 
   
-  Please wait a few minutes to receive your AWS credit code via email. If you do not receive an email confirmation, please check your company’s spam filter. If you're still having difficulty, please contact ajonsso@amazon.com.
+  Please wait a few minutes to receive your AWS credit code via email. If you do not receive an email confirmation, please check your company’s spam filter. If you're still having difficulty, please contact ajonsso@amazon.com
   </td>
 
-  <td class="credit" style="width:30%"> <a href="https://pages.awscloud.com/awsmp-wsm-dev-workshop-series-credit-request.html?trk=lab_trend-co-iac" target="_blank" class="credit-btn">Request AWS Credits</a>  </td>
+  <td class="credit" style="width:30%"> <a href="https://pages.awscloud.com/awsmp-wsm-dev-workshop-series-credit-request.html?trk=lab_trend-devsecops" target="_blank" class="credit-btn">Request AWS Credits</a>  </td>
 </tr>
 </table>
 
