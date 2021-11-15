@@ -3,11 +3,20 @@ title: "Building Modern Applications with Security Embedded - DevSecOps"
 chapter: true
 weight: 1
 ---
-# Building Modern Applications with Security Embedded - DevSecOps
 
-![TrendMicro](/images/logo.png)
+# WELCOME!
 
-# Welcome!
+## AWS Marketplace DevOps Workshop Series HANDS-ON Lab
+
+<a href="https://aws.amazon.com/marketplace/pp/prodview-g232pyu6l55l4?trk=el_a134p000003yrYeAAI&trkCampaign=AWSMP_pdp_dev_x_dg&sc_channel=el&sc_campaign=el_awsmp_mult&sc_outcome=Marketplace" target="_blank"><img src="/images/setup/trend-available-in-aws-marketplace-bage.png"></a>
+
+---
+
+## Building Modern Applications with Security Embedded - DevSecOps
+
+{{% notice note %}}
+This hands-on lab is part of the <a href="https://pages.awscloud.com/awsmp-wsm-sec-module-8-devsecops-en.html">AWS Marketplace DevOps Workshop Series - Module 8</a> ☁️ 💻
+{{% /notice %}}
 
 In this workshop, you’ll learn how to leverage **Trend Micro - Cloud One - Application Security** with your serverless applications running on AWS Lambda or containerized applications running on AWS Fargate. If you are interested in making cloud security more efficient, proactive, and gain visibility to help lead your developers, cloud architects, and DevOps engineers, this workshop is for you!
 
