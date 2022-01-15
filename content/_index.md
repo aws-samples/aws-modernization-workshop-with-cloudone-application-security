@@ -39,7 +39,7 @@ The workshop is divided into the sections listed below. Plan around two hours to
 
 <span style="color: #4e3eb1;"><i class='fas fa-check fa-xs'></i></span> <b> 5. Deploy Vulnerable Fargate Application and integrate Application Security (45 minutes)</b>
 
-<span style="color: #4e3eb1;"><i class='fas fa-check fa-xs'></i></span> <b> 4. Deploy Vulnerable Lambda Application and integrate Application Securit (20) minutes)</b>
+<span style="color: #4e3eb1;"><i class='fas fa-check fa-xs'></i></span> <b> 4. Deploy Vulnerable Lambda Application and integrate Application Security (20) minutes)</b>
 
 <span style="color: #4e3eb1;"><i class='fas fa-check fa-xs'></i></span> <b> 6. Reporting  (15 minutes)</b>
 

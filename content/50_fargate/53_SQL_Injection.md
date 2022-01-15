@@ -7,7 +7,7 @@ pre: "<b>4.2 </b>"
 
 SQL injection is a method of attacking data-driven applications wherein an attacker includes portions of SQL statements in an entry field. The newly formed rogue SQL command is passed by the website to your database where it is executed. The command can result in the attacker being able to read, add, delete, or change information in the database. Application Security protects against SQL injections by blocking common SQL injection techniques.
 
-- With SQL protection in Report mode, we can gather information regarding the vulnerability.
+- With SQL protection in **Report mode**, we can gather information regarding the vulnerability.
 
 #### In your AWS Fargate application, choose A1: Injection
 - SQL Injection

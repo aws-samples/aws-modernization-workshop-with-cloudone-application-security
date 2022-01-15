@@ -10,7 +10,7 @@ Application Security protects your application against illegal file access by bl
 - With Remote Command Execution protection in Report mode, we can gather information regarding the vulnerability.
 
 #### In your Lambda application command injection
-- •	The Lambda provides a feature to perform a name server lookup on the given domain.
+- The Lambda provides a feature to perform a name server lookup on the given domain.
 - Click **Start Lab** to be taken to the lambda function
 
 ![Integration](/images/ifa-lambda.png)

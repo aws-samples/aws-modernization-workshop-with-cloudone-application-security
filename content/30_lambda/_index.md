@@ -19,7 +19,7 @@ Open the [Trend Micro Cloud One console](https://cloudone.trendmicro.com/) and s
 ---
 
 #### 2.	Create a new security group
--  Click Create New Group. 
+- Click **Create New Group** 
 - Group Name:  **AWS-WORKSHOP-LAMBDA**
 - **Create Group**
 ![Integration](/images/newsecgroup.png)

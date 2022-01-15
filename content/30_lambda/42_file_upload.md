@@ -55,7 +55,7 @@ Application Security leverages Trend Micro Smart Scan as well as the ATSE to pro
 - **Add Rule**
 - <code>/var/runtime/botocore/data/*</code>
 - **Submit Rule** and **Save Changes**
-![Integration](/images/policy-select-lambda.png)
+
 ![Integration](/images/ifa-exception.png)
 ![Integration](/images/readcontrols.png)
 ![Integration](/images/rule.png)
@@ -71,7 +71,7 @@ Application Security leverages Trend Micro Smart Scan as well as the ATSE to pro
 ---
 
 #### 8. Change the Malicious File Upload mode to Mitigate.
-![Integration](/images/policy-select-lambda.png)
+
 ![Integration](/images/mfu-mitigate.png)
 
 ---
