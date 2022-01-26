@@ -14,12 +14,8 @@ Malicious file upload is a method when invalidated files are uploaded on vulnera
 
 Application Security leverages Trend Micro Smart Scan as well as the ATSE to protect your application from malicious file uploads by scanning uploaded files for malware and restricting the size of uploaded files.
 
-**1.** Go to [EICAR](https://www.eicar.org/?page_id=3950) and obtain the test file developed for a simple test of anti-malware engine.
+**1.** On the JumpBox desktop locate a folder named **Immersion_files**. An EICAR file should be there already if not go to [EICAR](https://www.eicar.org/?page_id=3950) and obtain the file for a simple test of anti-malware capabilities.
 
-:warning: **Temporarily disable your virus scanner, otherwise it will catch the eicar file and delete it.**
-
-**2.** Create a **.txt** file containing the EICAR string.
-![Integration](/images/eicar.png)
 
 ---
 
@@ -55,7 +51,7 @@ Application Security leverages Trend Micro Smart Scan as well as the ATSE to pro
 - **Add Rule**
 - <code>/var/runtime/botocore/data/*</code>
 - **Submit Rule** and **Save Changes**
-![Integration](/images/policy-select-lambda.png)
+
 ![Integration](/images/ifa-exception.png)
 ![Integration](/images/readcontrols.png)
 ![Integration](/images/rule.png)
@@ -71,7 +67,7 @@ Application Security leverages Trend Micro Smart Scan as well as the ATSE to pro
 ---
 
 #### 8. Change the Malicious File Upload mode to Mitigate.
-![Integration](/images/policy-select-lambda.png)
+
 ![Integration](/images/mfu-mitigate.png)
 
 ---

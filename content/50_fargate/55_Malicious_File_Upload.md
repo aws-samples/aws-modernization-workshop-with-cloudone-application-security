@@ -12,11 +12,9 @@ Malicious file upload is a method when invalidated files are uploaded on vulnera
 
 ####  If your application allows file uploads, attackers could upload malicious files that compromise your system. Application Security leverages Trend Micro™ Smart Scan as well as the Trend Micro™ Advanced Threat Scanning Engine (ATSE) to protect your application from malicious file uploads by scanning uploaded files for malware and restricting the size of uploaded files.
 
-**1.** Go to [European Institute for Computer Antivirus Research](https://www.eicar.org/?page_id=3950) (EICAR) to retrieve the test file developed for a simple test of anti-malware engine.
+**1.** On your Jump-Box's desktop look for a folder name **Immersion_files** 
 
-:warning: **Temporarily disable your virus scanner, otherwise it will catch the EICAR file and delete it.**
-
-**2.** Create a **.txt** file containing the EICAR string.
+**2.** Inside the **Immersion_files** folder an EICAR file should already be present. If not download an EICAR sample [here](https://www.eicar.org/?page_id=3950)
 ![Integration](/images/eicar.png)
 
 ---
@@ -27,7 +25,8 @@ Malicious file upload is a method when invalidated files are uploaded on vulnera
 #### 3. In your AWS Fargate application, choose A9 (Using Components with Know Vulnerability): 
 - Lab details
 - Access lab
-- Choose the EICAR file previously and upload.
+- Click **Choose File**. Select the EICAR file under **Immersion_files** 
+- Click **Upload**
 
 ![Integration](/images/file_upload_malware1.png)
 ![Integration](/images/file_upload_malware2.png)

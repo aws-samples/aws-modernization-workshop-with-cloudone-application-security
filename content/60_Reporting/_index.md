@@ -29,6 +29,8 @@ The usage is reported for the three following dimensions:
 
 
 ![Integration](/images/usage.png)
+![Integration](/images/usage2.png)
+![Integration](/images/usage3.png)
 
 {{% notice note %}}
 For more details on the usage summary view please visit the Reference section [here](https://cloudone.trendmicro.com/docs/application-security/usage/)
@@ -105,7 +107,9 @@ The Integrations tab allows for communication channels to be configured. This al
 - **Hint**: A hint you can use to help you remember what access token was used to integrate Application Security with Slack. Your integration key will be hidden once the integration is added for security reasons
 - **Channel Name**: The Slack channel you'd like the alerts to be posted to. Do not include the # sign
 - **Minimum Reported Severity**: The minimum severity of alerts that you’d like to be posted to your Slack channel. You can choose between high, medium, or low. Select **LOW**
+- Click **Add Integration**
 ![Integration](/images/slack7.png)
+![Integration](/images/ints-confirm.png)
 
 ---
 

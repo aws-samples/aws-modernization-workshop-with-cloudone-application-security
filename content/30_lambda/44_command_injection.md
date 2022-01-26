@@ -58,4 +58,5 @@ This event is generated as **Remote Command Execution** attack.
 #### Application Security offers advanced configuration for remote command attacks:
 - **HTTP Params**: Application Security will detect HTTP GET or POST parameters that result verbatim into a remote command execution in a code location executed during the request.
 - **Exec Control**: An algorithm that runs on each command execution within the group, comparing against the exec controls rules you’ve created. (List of rules written in REGEX)
+![Integration](/images/remote-adv-config.png)
 ![Integration](/images/remote-adv.png)
