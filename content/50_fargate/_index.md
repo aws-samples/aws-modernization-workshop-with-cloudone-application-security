@@ -15,12 +15,25 @@ This application is written in Python 3.8. Following the Trend Micro documentati
 
 ---
 
-#### 1.	Navigate to [Github page](https://github.com/JustinDPerkins/pygoat-tm) and clone the repository on your local machine
+#### 1.	In your [AWS account](https://aws.amazon.com/)
+- Navigate to **AWS Cloud9**
+- Click **Create environment**
+- Name: <code>immersion-day</code>
+- Click **Next step**
+- Leave the default settings, click **Next step**
+- Review and click **Create environment**
+
+![cloud9](/images/cloudide1.png)
+![cloud9](/images/cloudide2.png)
+![cloud9](/images/cloudide3.png)
+![cloud9](/images/cloudide4.png)
+
+#### 2.	In the AWS Cloud9 IDE expand the terminal window at the bottom
 - Make a directory called **aws_workshop**
 - Go to **aws_workshop**
-- Clone the Git repository **https://github.com/JustinDPerkins/pygoat-tm**
+- Clone the Git repository <code>git clone https://github.com/JustinDPerkins/pygoat-tm</code>
 
-Here are the example of Linux and Mac commands to do the steps mentioned:
+Copy and run the commands below in Cloud9 terminal:
 
 ```
 mkdir aws_workshop
@@ -28,12 +41,11 @@ cd aws_workshop
 git clone https://github.com/JustinDPerkins/pygoat-tm
 ```
 
-![Login](/images/github.png)
 ![Login](/images/git-clone.png)
 
 ---
 
-#### 2.	In a Command/Terminal/Shell window navigate into the repo home directory.
+#### 3.	Navigate into the repo home directory.
 ```
 cd pygoat-tm
 ```
@@ -41,19 +53,28 @@ cd pygoat-tm
 
 ---
 
-#### 3.	The Application Security agent uses a custom security library. You will need to edit the requirements.txt to include the package.
+#### 4.	The Application Security agent uses a custom security library. You will need to edit the requirements.txt to include the package.
 - Add the Application Security package to **requirements.txt**:
-- <code>trend_app_protect</code>
+- In Cloud9 terminal run:
+
+```
+vi requirements.txt
+```
+
+- Type <code>i</code> and **press enter** to edit the file
+- On a new line add <code>trend_app_protect</code>
+- Hit the **esc** or **escape key**
+- To save the changes type <code>:wq!</code>
 ![Integration](/images/reqs.png)
 
 ---
 
-#### 4.	The Application Security agent needs the credentials to be able to activate successful communication to your Trend Micro Cloud One account. In your Trend Micro Cloud One account, select the tile Application Security.
+#### 5.	The Application Security agent needs the credentials to be able to activate successful communication to your Trend Micro Cloud One account. In your Trend Micro Cloud One account, select the tile Application Security.
 ![Integration](/images/c1as-tile.png)
 
 ---
 
-#### 5.	Create a New Group named AWS-Workshop-Fargate.
+#### 6.	Create a New Group named AWS-Workshop-Fargate.
 - Create Group
 - Note the **Key** and **Secret** to use for later.
 ![Integration](/images/fargate-group.png)
@@ -62,22 +83,53 @@ cd pygoat-tm
 
 ---
 
-#### 6.	Back in the terminal window, under the Git project root, you need to create a file for the security library credentials. Follow the steps-by-steps below to make the configuration:
+#### 7.	Back in the Cloud9, under the Git project root, you need to create a file for the security library credentials.
 - Create a file called <code>trend_app_protect.ini</code>
-- Provide your group **Key** and **Secret**
+```
+vi trend_app_protect.ini
+```
 ![Integration](/images/ini-file.png)
+
+- Here you will provide your group **Key** and **Secret** from the last steps.
+- Type <code>i</code> and **press enter** to edit the file
+
+```
+[trend_app_protect]
+key = 01234567-1111-2222-3333-01234567890
+secret = 01234567-1111-2222-3333-01234567890
+```
+
 ![Integration](/images/ini.png)
 
+- Hit the **esc** or **escape key**
+- To save the changes type <code>:wq!</code>
+![Integration](/images/ini-final.png)
 ---
 
-#### 7.	Next, we need to import the Application Security protection module.
+#### 8.	Last we need to import the Application Security protection module.
 - Under the **root directory of the Git project that you have cloned**
-- <code>cd pygoat/pygoat</code>
-- Import the **trend_app_protect.start** module at the top of your **WSGI** script
-- <code>import trend_app_protect.start</code>
-- **Save** return back to the **Git project root directory**
+```
+cd pygoat/pygoat
+vi wsgi.py
+```
+
 ![Integration](/images/wsgi-dir.png)
+
+- In the **WSGI** script import the **trend_app_protect.start** module
+- Type <code>i</code> and **press enter** to edit the file
+
+```
+import trend_app_protect.start
+```
 ![Integration](/images/wsgi.png)
+
+- Hit the **esc** or **escape key**
+- To save the changes type <code>:wq!</code>
+- Return to the project's root directory
+```
+cd ~/environment/aws_workshop/pygoat-tm
+```
+![Integration](/images/return-to-root.png)
 
 ---
 
@@ -85,6 +137,9 @@ cd pygoat-tm
 
 #### 1. Login into your [AWS account](https://aws.amazon.com/) and navigate to Amazon ECR:
 - **Create a new repository**
+- Visibility: **Private**
+- Name: <code>aws-workshop-repo</code>
+- Click **Create repository**
 ![Integration](/images/new-repo.png)
 ![Integration](/images/repo1.png)
 
@@ -98,42 +153,32 @@ You will need these details below to push the application that you have cloned a
 
 ---
 
-#### 3. In a terminal/shell/command window, navigate to the root directory of the previously cloned Git project.
+#### 3. In your Cloud9 IDE terminal, ensure you are at the root directory of the cloned Git project.
+```
+cd ~/environment/aws_workshop/pygoat-tm
+```
 ![Integration](/images/root.png)
 
 ---
 
-#### 4. Using the push commands steps provided by AWS
-
-{{% notice warning %}}
-<p style='text-align: left;'>
-Before pushing the container image to Amazon ECR, you need to have the <b>AWS CLI configured</b>. If you need help, use the <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html" target="_top"><b>link here.</b></a> 
-</p>
-{{% /notice %}}
-
-
-{{% notice warning %}}
-<p style='text-align: left;'>
-It's important to remember that you need to have Docker installed on your desktop to run this lab. For more details how to install <b>Docker into your desktop</b>, click the <a href="https://docs.docker.com/desktop/" target="_top"><b>link here.</b></a>  
-</p>
-{{% /notice %}}
+#### 4. Using the push commands steps provided by AWS ECR
 
 - Retrieve an authentication token and authenticate your Docker client to your registry
-    -  Use the first command provided on the AWS console in the step before. It should be similar to the command in the image below:
+- Copy the first command provided on the AWS console in the step before. It should be similar to the command in the image below:
 
 ![Integration](/images/auth.png)
 
 ---
 
-#### 5.	Build the Docker image using the second command provided in AWS console
+#### 5.	Build the Docker image using the second command provided in AWS ECR console
 Command: <code>docker build -t aws-workshop-repo .</code>
 ![Integration](/images/build.png)
 
 ---
 
-#### 6. After the build is complete, tag your container image so you can push it to this container image registry.
+#### 6. After the build is complete, tag your container image so you can push it to AWS ECR.
 
-- You can use the third command provided in the previous steps on the AWS console:
+- You can use the third command command provided by AWS ECR
 - Command example:**docker tag aws-workshop-fargate:latest <'account'>.dkr.ecr.<'region'>.amazonaws.com/aws-workshop-fargate:latest**
 ![Integration](/images/tag.png)
 
@@ -141,7 +186,7 @@ Command: <code>docker build -t aws-workshop-repo .</code>
 
 #### 7. Push the container image to your newly created Amazon ECR
 
-- You can use the fourth command provided in the previous steps on the AWS console 
+- Use the fourth command provided by AWS ECR 
 - Command example:**docker push <'account'>.dkr.ecr.<'region'>.amazonaws.com/aws-workshop-fargate:latest**
 ![Integration](/images/push1.png)
 
@@ -177,6 +222,7 @@ This AWS CloudFormation template creates a VPC with internet access and two publ
 ---
 
 #### 3. Navigate to Amazon ECS and select the newly created cluster.
+![Integration](/images/new-cluster.png)
 ![Integration](/images/ecs-cluster.png)
 
 ---
@@ -192,8 +238,8 @@ This AWS CloudFormation template creates a VPC with internet access and two publ
 ---
 
 #### 6. Ensure the application is working
-- In a new browser tab, navigate to the public IP address and add <b>Port 8000</b>
-    -  **Example to use in the browser:** 100.26.189.51:8000
+- In our created Jump-Box, open **FireFox** and navigate to the public IP address and add <b>Port 8000</b>
+    -  **Example to use in the browser:** <code>100.26.189.51:8000</code>
 ![Integration](/images/browser-ip.png)
 ![Integration](/images/pygoat.png)
 

@@ -1,0 +1,162 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Immersion Workshop for Cloud One App Sec- Jumpbox setup."
+Mappings: 
+  RegionMap: 
+    us-east-1:
+      windows: ami-0aad84f764a2bd39a
+
+
+Parameters:
+  KeyPair:
+    Type: String
+    Default: "immersion-kp"
+    Description: Enter name of a key pair for RDP
+  EnvironmentName:
+    Description: An environment name that is prefixed to resource names
+    Type: String
+    Default: WS-Workshop
+  VpcCIDR:
+    Description: Please enter the IP range (CIDR notation) for this VPC
+    Type: String
+    Default: 10.0.0.0/23
+  PublicSubnet1CIDR:
+    Description: Please enter the IP range (CIDR notation) for the public subnete
+    Type: String
+    Default: 10.0.1.0/28
+  IPforRDP:
+    Description: Please enter the IP range (CIDR notation) for the RDP access to instance
+    Type: String
+    Default: 0.0.0.0/0
+
+Resources:
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+       - Key: Owner
+         Value: Devteam
+       - Key: Environment
+         Value: Dev
+       - Key: Role
+         Value: Developer
+       - Key: Name
+         Value: !Ref EnvironmentName
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Ref EnvironmentName
+
+  InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref InternetGateway
+      VpcId: !Ref VPC
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnet1CIDR
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Subnet (AZ1)
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Routes
+
+  DefaultPublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
+
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet1
+
+  WorkshopSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: "workshop-sg"
+      GroupDescription: "Security group for aws workshop"
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - Description: "RDP Access"
+          IpProtocol: tcp
+          FromPort: 3389
+          ToPort: 3389
+          CidrIp: !Ref IPforRDP
+        - Description: "Cloud One Access"
+          IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+        - Description: "Cloud One Access"
+          IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 0.0.0.0/0
+      Tags:
+       - Key: Owner
+         Value: Devteam
+       - Key: Environment
+         Value: Dev
+       - Key: Role
+         Value: Developer
+       - Key: Name
+         Value: !Ref EnvironmentName
+
+  InboundRule:
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId: !Ref WorkshopSecurityGroup
+      IpProtocol: -1
+      FromPort: -1
+      ToPort: -1
+      SourceSecurityGroupId: !GetAtt WorkshopSecurityGroup.GroupId
+
+  WinServer:
+    Type: AWS::EC2::Instance
+    DependsOn: WorkshopSecurityGroup
+    Properties:
+        SubnetId: !Ref PublicSubnet1
+        SecurityGroupIds: 
+          - !Ref WorkshopSecurityGroup
+        ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", windows]
+        InstanceType: t2.medium
+        KeyName: !Ref KeyPair
+        UserData: 
+           !Base64 | 
+            <powershell> msiexec.exe /i https://awscli.amazonaws.com/AWSCLIV2.msi; Set-MpPreference -DisableRealtimeMonitoring $true; $AdminKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}"; $UserKey = "HKLM:\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A8-37EF-4b3f-8CFC-4F3A74704073}"; Set-ItemProperty -Path $AdminKey -Name "IsInstalled" -Value 0; Set-ItemProperty -Path $UserKey -Name "IsInstalled" -Value 0; [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; mkdir "C:\Users\Administrator\Desktop\Immersion_files"; Invoke-WebRequest -Uri http://secure.eicar.org/eicar.com.txt -OutFile "C:\Users\Administrator\Desktop\Immersion_files\eicar.com.txt"; Invoke-WebRequest 'https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US' -OutFile  "C:\Users\Administrator\Desktop\firefox_installer.exe"; Invoke-Expression "C:\Users\Administrator\Desktop\firefox_installer.exe /S" </powershell>   
+        Tags:
+          -
+            Key: Name
+            Value: TM-WorkShop
+Outputs:
+  EC2PublicIp:
+    Description: Server Public IP
+    Value: !GetAtt WinServer.PublicIp
+  EC2PrivateIp:
+    Description: Server Private IP
+    Value: !GetAtt WinServer.PrivateIp

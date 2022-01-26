@@ -59,7 +59,7 @@ Open the [Trend Micro Cloud One console](https://cloudone.trendmicro.com/) and s
 
 ---
 
-#### 6. In a new browser tab, navigate to the website URL provided to ensure app is functioning.
+#### 6. In the Jump-Box open FireFox, and navigate to the website URL provided to ensure app is functioning.
 ![Integration](/images/lambda-app-home.png)
 
 ---

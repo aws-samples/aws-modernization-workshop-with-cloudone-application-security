@@ -32,7 +32,7 @@ pre: "<b>4.1 </b>"
 - Select our created **Cluster**
 - Select **Tasks** Tab
 - Select your **Task ID** to obtain the **Public IP address**
-- Navigate to a new browser tab to add: **your.ip.address:8000**
+- Using our **Jump-Box** RDP session, in a FireFox browser paste the IP address and port: <code>**your.ip.address:8000**</code>
 ![Integration](/images/pygoat.png)
 
 ---
@@ -41,7 +41,7 @@ pre: "<b>4.1 </b>"
 Example:
 
 - Username: <code>aws-workshop</code>
-- Password: <code>L3tsL3arn!</code>
+- Password: <code>L3tsL3arn</code>
 ![Integration](/images/sign-up.png)
 ![Integration](/images/new_user.png)
 ![Integration](/images/login_pygoat.png)
