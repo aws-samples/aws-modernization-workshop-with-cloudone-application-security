@@ -37,7 +37,6 @@ This event is generated as **Remote Command Execution** attack.
 - <code>subprocess.Popen._execute_child</code>
 
 ![Integration](/images/rce-notblocked.png)
-![Integration](/images/rce-request.png)
 ![Integration](/images/rce-rcedetails.png)
 
 ---
