@@ -36,7 +36,7 @@ A Key Pair is required before continuing with this CloudFormation deployment. If
 
 #### To deploy the jump-box click **Launch Stack**
 
-[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=aws-jumpbox&templateURL=https://aws-workshop-c1as-cft-templates.s3.amazonaws.com/app-sec-jumpbox.yml)
+[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=aws-jumpbox&templateURL=https://immersionday-workshops-trendmicro.s3.amazonaws.com/application-security/app-sec-jumpbox.yml)
 
 <details>
   <summary> -> <code>CLICK HERE</code> to see step by step instruction to deploy CFT</summary>
