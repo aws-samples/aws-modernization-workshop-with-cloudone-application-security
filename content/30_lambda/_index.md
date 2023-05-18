@@ -32,7 +32,7 @@ Open the [Trend Micro Cloud One console](https://cloudone.trendmicro.com/) and s
 ---
 
 #### 3.	Launch the CloudFormation template provided for the Lambda application that will be deployed.
-[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=c1as-lambda-workshop&templateURL=https://aws-workshop-c1as-cft-templates.s3.amazonaws.com/c1as-vuln-serverless-app.yaml)
+[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=c1as-lambda-workshop&templateURL=https://immersionday-workshops-trendmicro.s3.amazonaws.com/application-security/c1as-vuln-serverless-app.yaml)
 
 {{% notice note %}}
 <strong>The Application Security agent has been automatically added in the CloudFormation template. The steps used to deploy the agent will be covered later in the workshop.</strong>

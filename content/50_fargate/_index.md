@@ -206,7 +206,7 @@ This AWS CloudFormation template creates a VPC with internet access and two publ
 ![Integration](/images/fargate-archi.png)
 {{% /notice %}}
 
-[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=c1as-fargate-workshop&templateURL=https://aws-workshop-c1as-cft-templates.s3.amazonaws.com/c1as-fargate-workshop.yaml)
+[![Launch Stack](https://cdn.rawgit.com/buildkite/cloudformation-launch-stack-button-svg/master/launch-stack.svg)](https://console.aws.amazon.com/cloudformation/home#/stacks/new?stackName=c1as-fargate-workshop&templateURL=https://immersionday-workshops-trendmicro.s3.amazonaws.com/application-security/c1as-fargate-workshop.yaml)
 
 ---
 
